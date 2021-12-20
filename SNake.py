@@ -33,20 +33,40 @@ for i in range(presents_size):
     id2 = canvas.create_oval(x*snake_item+2,y*snake_item+2,x*snake_item+snake_item-2,y*snake_item+snake_item-2,fill=present_color1)    
     presents_list.append([x, y, id1, id2])
 print(presents_list)
+
 def snake_paint_item(canvas, x, y):
+    """
+    Функция snake_paint_item отвечает за саму змейку 
+    (размер, цвет, размешает элементы змейки и две 
+    переменные, которые определяют позицию змейки).
+    """
     global snake_list
     id1 = canvas.create_rectangle(x*snake_item,y*snake_item, x*snake_item+snake_item,y*snake_item+snake_item,fill=snake_color2)
     id2 = canvas.create_rectangle(x*snake_item+2,y*snake_item+2,x*snake_item+snake_item-2,y*snake_item+snake_item-2,fill=snake_color1)
     snake_list.append([x,y,id1,id2])
     #print(snake_list)
 snake_paint_item(canvas, snake_x, snake_y)
+
 def check_can_we_delete_snake_item():
+    """
+    Функция check_can_we_delete_snake_item 
+    отвечает за удаление хвоста змейки, чтоб не 
+    было бесконечно длиной змеи 
+    (это функция удаляет первый элемент змеи, 
+    если snake_list >= snake_size)
+    """
     if len(snake_list) >= snake_size:
         temp_item = snake_list.pop(0)
         #print(temp_item)
         canvas.delete(temp_item[2])
         canvas.delete(temp_item[3])
+
 def check_if_we_found_present():
+    """
+    Функция check_if_found_present отвечает, 
+    чтоб змейка после поедания подарка 
+    росла в размерах.
+    """
     global snake_size
     for i in range(len(presents_list)):
         if presents_list[i][0] == snake_x and presents_list[i][1] == snake_y:
@@ -55,7 +75,15 @@ def check_if_we_found_present():
             canvas.delete(presents_list[i][2])
             canvas.delete(presents_list[i][3])
     #print(snake_x, snake_y)
+
 def snake_move(event):
+    """
+    Функция snake_move отвечает за 
+    передвижение змейки по полю, 
+    то есть это функция отвечает за 
+    направление змейки в 
+    определённую сторону.
+    """
     global snake_x
     global snake_y
     global snake_x_nav
@@ -84,13 +112,23 @@ canvas.bind_all("<KeyPress-Left>", snake_move)
 canvas.bind_all("<KeyPress-Right>", snake_move)
 canvas.bind_all("<KeyPress-Up>", snake_move)
 canvas.bind_all("<KeyPress-Down>", snake_move)
+
 def game_over():
+    """
+    Эта функция отвечает за проигрыш игрока
+    """
     global Game_Running
     Game_Running = False
 def check_if_borders():
+    """
+    Эта функция отвечает за проигрыш игрока, в случае если он врежется в стену
+    """
     if snake_x>virtual_game_x or snake_x<0 or snake_y>virtual_game_y or snake_y<0:
         game_over()
 def check_we_touch_self(f_x, f_y):
+    """
+    Эта функция отвечает за проигрыш игрока, в случае если он врежеться в самого себя
+    """
     global Game_Running
     if not (snake_x_nav == 0 and snake_y_nav == 0):
         for i in range(len(snake_list)):
