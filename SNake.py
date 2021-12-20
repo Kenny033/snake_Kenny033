@@ -33,6 +33,9 @@ for i in range(presents_size):
     id2 = canvas.create_oval(x*snake_item+2,y*snake_item+2,x*snake_item+snake_item-2,y*snake_item+snake_item-2,fill=present_color1)    
     presents_list.append([x, y, id1, id2])
 print(presents_list)
+"""Функция snake_paint_item отвечает за саму змейку 
+(размер, цвет, размешает элементы змейки и две 
+переменные, которые определяют позицию змейки)."""
 def snake_paint_item(canvas, x, y):
     global snake_list
     id1 = canvas.create_rectangle(x*snake_item,y*snake_item, x*snake_item+snake_item,y*snake_item+snake_item,fill=snake_color2)
@@ -40,12 +43,20 @@ def snake_paint_item(canvas, x, y):
     snake_list.append([x,y,id1,id2])
     #print(snake_list)
 snake_paint_item(canvas, snake_x, snake_y)
+"""Функция check_can_we_delete_snake_item 
+отвечает за удаление хвоста змейки, чтоб не 
+было бесконечно длиной змеи 
+(это функция удаляет первый элемент змеи, 
+если snake_list >= snake_size)"""
 def check_can_we_delete_snake_item():
     if len(snake_list) >= snake_size:
         temp_item = snake_list.pop(0)
         #print(temp_item)
         canvas.delete(temp_item[2])
         canvas.delete(temp_item[3])
+"""Функция check_if_found_present отвечает, 
+чтоб змейка после поедания подарка 
+росла в размерах."""
 def check_if_we_found_present():
     global snake_size
     for i in range(len(presents_list)):
@@ -55,6 +66,11 @@ def check_if_we_found_present():
             canvas.delete(presents_list[i][2])
             canvas.delete(presents_list[i][3])
     #print(snake_x, snake_y)
+"""Функция snake_move отвечает за 
+передвижение змейки по полю, 
+то есть это функция отвечает за 
+направление змейки в 
+определённую сторону."""
 def snake_move(event):
     global snake_x
     global snake_y
@@ -84,6 +100,11 @@ canvas.bind_all("<KeyPress-Left>", snake_move)
 canvas.bind_all("<KeyPress-Right>", snake_move)
 canvas.bind_all("<KeyPress-Up>", snake_move)
 canvas.bind_all("<KeyPress-Down>", snake_move)
+"""указано 3 функции все 
+они отвечают за пройгреш 
+игрока(выход за границы карты-check_if_bordes, 
+сталкиваеться в саму себя- checl_we_touch_self,
+игра закончена- game over)"""
 def game_over():
     global Game_Running
     Game_Running = False
