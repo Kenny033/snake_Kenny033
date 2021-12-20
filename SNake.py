@@ -38,6 +38,9 @@ def snake_paint_item(canvas, x, y):
     Функция snake_paint_item отвечает за саму змейку 
     (размер, цвет, размешает элементы змейки и две 
     переменные, которые определяют позицию змейки).
+    canvas - область где находиться змейка 
+    x,y- по ним мы подстраиваем элементы змейки
+    global snake_list - обновление списка (presents_list)
     """
     global snake_list
     id1 = canvas.create_rectangle(x*snake_item,y*snake_item, x*snake_item+snake_item,y*snake_item+snake_item,fill=snake_color2)
@@ -79,6 +82,11 @@ def snake_move(event):
     то есть это функция отвечает за 
     направление змейки в 
     определённую сторону.
+    эта функция принимает события 
+    global snake_x - это переменное, оно берет своё значение от сюда ->  snake_x=virtual_game_x//2
+    global snake_y - это переменное, оно берет своё значение от сюда ->  snake_y=virtual_game_y//2
+    global snake_x_nav - это переменное, оно берет своё значение от сюда ->  snake_x_nav = 0
+    global snake_y_nav - это переменное, оно берет своё значение от сюда ->  snake_y_nav = 0
     """
     global snake_x
     global snake_y
@@ -142,6 +150,9 @@ while Game_Running:
     tk.update()
     time.sleep(0.15)
 def fun_nothing(event):
+    """
+    это функция принимает события
+    """
     pass
 canvas.bind_all("<KeyPress-Left>", fun_nothing)
 canvas.bind_all("<KeyPress-Right>", fun_nothing)
