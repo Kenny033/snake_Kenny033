@@ -33,7 +33,6 @@ for i in range(presents_size):
     id2 = canvas.create_oval(x*snake_item+2,y*snake_item+2,x*snake_item+snake_item-2,y*snake_item+snake_item-2,fill=present_color1)    
     presents_list.append([x, y, id1, id2])
 print(presents_list)
-
 def snake_paint_item(canvas, x, y):
     """
     Функция snake_paint_item отвечает за саму змейку 
@@ -46,7 +45,6 @@ def snake_paint_item(canvas, x, y):
     snake_list.append([x,y,id1,id2])
     #print(snake_list)
 snake_paint_item(canvas, snake_x, snake_y)
-
 def check_can_we_delete_snake_item():
     """
     Функция check_can_we_delete_snake_item 
@@ -60,7 +58,6 @@ def check_can_we_delete_snake_item():
         #print(temp_item)
         canvas.delete(temp_item[2])
         canvas.delete(temp_item[3])
-
 def check_if_we_found_present():
     """
     Функция check_if_found_present отвечает, 
@@ -75,7 +72,6 @@ def check_if_we_found_present():
             canvas.delete(presents_list[i][2])
             canvas.delete(presents_list[i][3])
     #print(snake_x, snake_y)
-
 def snake_move(event):
     """
     Функция snake_move отвечает за 
@@ -112,7 +108,6 @@ canvas.bind_all("<KeyPress-Left>", snake_move)
 canvas.bind_all("<KeyPress-Right>", snake_move)
 canvas.bind_all("<KeyPress-Up>", snake_move)
 canvas.bind_all("<KeyPress-Down>", snake_move)
-
 def game_over():
     """
     Эта функция отвечает за проигрыш игрока
